@@ -22,21 +22,33 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
       break;
 
     case 'get':
-      // ... id
+     const contactById = await getContactById (id)
+     if (contactById) {
+        console.log(chalk.cyan('Contact found'));
+        console.log(contactById)
+        return
+     }
+        console.log(chalk.red('Contact not found'));
       break;
 
     case 'add':
       const newContact = await addContact(name, email, phone)
-      console.log(chalk.blue('Add new contact'));
+      console.log(chalk.blue('Add new contact:', ));
       console.log(newContact)
       break;
 
     case 'remove':
-      // ... id
+      const removedContact = await removeContact (id)
+     if (removedContact) {
+      console.log(chalk.yellow('Remove contact with id:', id));
+      console.log(removedContact)
+      return
+     }
+      console.log(chalk.red('Contact not found'));
       break;
 
     default:
-      console.warn(chalk.red('Unknown action type!'));
+      console.warn(chalk.bgRed('Unknown action type!'));
   }
 }
 
