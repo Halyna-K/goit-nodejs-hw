@@ -26,7 +26,9 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
       break;
 
     case 'add':
-      // ... name email phone
+      const newContact = await addContact(name, email, phone)
+      console.log(chalk.blue('Add new contact'));
+      console.log(newContact)
       break;
 
     case 'remove':

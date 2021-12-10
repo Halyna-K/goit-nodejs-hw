@@ -20,8 +20,12 @@ function removeContact(contactId) {
     // ...твой код
   }
 
-function addContact(name, email, phone) {
-    // ...твой код
+const addContact = async (name, email, phone) => {
+    const contacts = await readContent()
+    const newContact = { name, email, phone, id:crypto.randomUUID()}
+    contacts.push(newContact)
+    await fs.writeFile(path.join(__dirname, 'db', 'contacts.json'), JSON.stringify(contacts, null, 2))
+    return newContact
   }
 
   module.exports = {listContacts, getContactById, removeContact, addContact}
